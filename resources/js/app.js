@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('notifications-component', require('./components/NotificationsComponent.vue').default);
+Vue.component('send-button', require('./components/SendComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

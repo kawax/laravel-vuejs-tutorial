@@ -17,15 +17,26 @@
                 notifications: [],
             }
         },
+        props: [
+            'userId',
+        ],
         mounted () {
             this.getNotifications()
+            this.echo()
         },
         methods: {
             async getNotifications () {
                 const res = await axios.get('/api/notifications')
                 if (res.status === 200) {
                     this.notifications = res.data
+                    console.log(this.notifications)
                 }
+            },
+            echo () {
+                Echo.private('App.User.' + this.userId).notification((notification) => {
+                    this.notifications.unshift(notification)
+                    console.log(notification)
+                })
             },
         },
     }

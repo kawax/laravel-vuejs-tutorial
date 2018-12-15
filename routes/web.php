@@ -11,23 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/api/notifications', function () {
-    return [
-        [
-            'id'      => 1,
-            'message' => 'message 1',
-        ],
-        [
-            'id'      => 2,
-            'message' => 'message 2',
-        ],
-    ];
+Route::middleware('auth')->group(function () {
+    Route::get('/api/notifications', 'NotificationController');
+
+    Route::post('api/send', 'SendController');
 });
